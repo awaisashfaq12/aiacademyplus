@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Pro Academy | The Hardest Path</title>
+    <style>
+        :root { --neon: #00ff41; --bg: #050505; --error: #ff003c; }
+        
+        @keyframes pulse { 0% { box-shadow: 0 0 5px var(--neon); } 50% { box-shadow: 0 0 20px var(--neon); } 100% { box-shadow: 0 0 5px var(--neon); } }
+        @keyframes glitch { 0% { transform: translate(0); } 20% { transform: translate(-5px, 5px); } 40% { transform: translate(-5px, -5px); } 60% { transform: translate(5px, 5px); } 80% { transform: translate(5px, -5px); } 100% { transform: translate(0); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+
+        body { background: var(--bg); color: white; font-family: 'Courier New', monospace; margin: 0; overflow-x: hidden; }
+        
+        header { 
+            padding: 50px; text-align: center; border-bottom: 2px solid var(--neon); 
+            animation: pulse 3s infinite; background: black;
+        }
+
+        .container { max-width: 1100px; margin: auto; padding: 20px; }
+
+        .level-card { 
+            background: #111; border: 1px solid #333; padding: 30px; margin: 20px 0; 
+            border-radius: 10px; animation: fadeInUp 1s ease-out; position: relative;
+        }
+
+        .locked { filter: blur(5px); pointer-events: none; opacity: 0.5; }
+
+        h2 { color: var(--neon); text-transform: uppercase; }
+
+        .code-window { 
+            background: #000; padding: 15px; border-radius: 5px; border-left: 4px solid var(--neon);
+            margin: 15px 0; font-size: 0.9rem; color: #adadad;
+        }
+
+        .quiz-box { background: #1a1a1a; padding: 20px; border-radius: 8px; margin-top: 20px; }
+        
+        .opt { 
+            display: block; padding: 12px; background: #222; margin: 10px 0; 
+            border-radius: 5px; cursor: pointer; transition: 0.3s; 
+        }
+        .opt:hover { background: var(--neon); color: black; font-weight: bold; }
+
+        .btn-claim { 
+            background: var(--neon); color: black; border: none; padding: 15px 30px; 
+            font-weight: bold; cursor: pointer; font-size: 1.2rem; display: none; width: 100%;
+        }
+
+        /* Certificate Styling */
+        #certificate { 
+            display: none; background: #fff; color: #000; padding: 60px; 
+            border: 15px double #000; text-align: center; margin-top: 50px;
+            box-shadow: 0 0 50px white;
+        }
+
+        .cert-header { font-size: 3.5rem; margin: 0; font-family: serif; }
+        .glitch-active { animation: glitch 0.3s linear infinite; border: 2px solid var(--error); }
+    </style>
+</head>
+<body id="main-body">
+
+<header>
+    <h1 style="font-size: 3rem; margin: 0;">&lt; ELITE ACADEMY /&gt;</h1>
+    <p>MASTER THE CODE. EARN THE KEY.</p>
+</header>
+
+<div class="container">
+
+    <!-- LEVEL 1 -->
+    <div class="level-card" id="lvl1">
+        <h2>Level 1: HTML5 & CSS3 Advanced</h2>
+        <p>Web development ki buniyad. Bina structure ke hacking mumkin nahi.</p>
+        <div class="code-window">
+            &lt;div class="box"&gt; Content &lt;/div&gt;<br>
+            .box { animation: move 2s infinite; }
+        </div>
+        <div class="quiz-box">
+            <p>Q1: CSS mein "Z-Index" ka kya kaam hota hai?</p>
+            <div class="opt" onclick="check(1, 'right')">Elements ko ek doosre ke upar/neeche set karna</div>
+            <div class="opt" onclick="check(1, 'wrong')">Text ka size barhana</div>
+        </div>
+    </div>
+
+    <!-- LEVEL 2 -->
+    <div class="level-card locked" id="lvl2">
+        <h2>Level 2: Python Scripting</h2>
+        <p>Automation aur complex algorithms seekhein.</p>
+        <div class="code-window">
+            import socket<br>
+            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        </div>
+        <div class="quiz-box">
+            <p>Q2: Python mein "Dictionary" ko kaise define karte hain?</p>
+            <div class="opt" onclick="check(2, 'wrong')">my_list = []</div>
+            <div class="opt" onclick="check(2, 'right')">my_dict = { "key": "value" }</div>
+        </div>
+    </div>
+
+    <!-- LEVEL 3 -->
+    <div class="level-card locked" id="lvl3">
+        <h2>Level 3: Java Enterprise & Security</h2>
+        <p>System security aur backend coding ka king language.</p>
+        <div class="code-window">
+            public class Main { <br>
+            &nbsp;&nbsp;public static void main(String[] args) { } <br>
+            }
+        </div>
+        <div class="quiz-box">
+            <p>Q3: Java mein "Encapsulation" ka kya matlab hai?</p>
+            <div class="opt" onclick="check(3, 'right')">Data ko classes mein hide (secure) karna</div>
+            <div class="opt" onclick="check(3, 'wrong')">Internet se data download karna</div>
+        </div>
+    </div>
+
+    <button class="btn-claim" id="claimBtn" onclick="showCert()">CLAIM ELITE CERTIFICATE</button>
+
+    <!-- CERTIFICATE -->
+    <div id="certificate">
+        <p>OFFICIAL GRADUATE OF ELITE ACADEMY</p>
+        <h1 class="cert-header">CERTIFICATE</h1>
+        <p>This recognizes that</p>
+        <h2 id="student-name" style="font-size: 3rem; color: #000; border-bottom: 2px solid #000; display: inline-block;">NAME</h2>
+        <p>Has conquered the toughest coding challenges in <br> <b>HTML, CSS, PYTHON & JAVA</b>.</p>
+        <div style="margin-top: 30px; font-weight: bold; letter-spacing: 2px;" id="cert-key">KEY: LOADING...</div>
+        <p style="font-size: 0.8rem; margin-top: 20px;">Verification ID: 2026-PRO-HACK-88</p>
+    </div>
+</div>
+
+<script>
+    let progress = 0;
+
+    function check(lvl, ans) {
+        if(ans === 'right') {
+            alert("✅ Sahi Jawab! Level Unlocked.");
+            progress++;
+            unlockNext(lvl + 1);
+        } else {
+            // Glitch Animation on Wrong Answer
+            document.getElementById('main-body').classList.add('glitch-active');
+            setTimeout(() => {
+                document.getElementById('main-body').classList.remove('glitch-active');
+            }, 500);
+            alert("❌ Galat! Dubara koshish karein.");
+        }
+    }
+
+    function unlockNext(nextLvl) {
+        if(nextLvl <= 3) {
+            document.getElementById('lvl' + nextLvl).classList.remove('locked');
+            window.scrollTo(0, document.getElementById('lvl' + nextLvl).offsetTop - 100);
+        } else {
+            document.getElementById('claimBtn').style.display = 'block';
+        }
+    }
+
+    function showCert() {
+        let name = prompt("Certificate ke liye apna pura naam likhein:");
+        if(!name) return;
+        
+        document.getElementById('student-name').innerText = name.toUpperCase();
+        document.getElementById('cert-key').innerText = "ELITE-KEY: " + Math.random().toString(36).substr(2, 9).toUpperCase();
+        document.getElementById('certificate').style.display = 'block';
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+</script>
+
+</body>
+</html>
